@@ -8,6 +8,7 @@ import Footer from './components/Footer'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [bookings, setBookings] = useState([])
 
   const handleLogin = () => {
     setIsAuthenticated(true)
@@ -28,12 +29,16 @@ function App() {
             path="/booking"
             element={
               isAuthenticated ? (
-                <BookingPage />
+                <BookingPage bookings={bookings} setBookings={setBookings} /> // Pass bookings as props
               ) : (
                 <Navigate to="/login" replace />
               )
             }
           />
+
+
+
+
           <Route path="/" element={<Navigate to="/booking" replace />} />
         </Routes>
       </main>

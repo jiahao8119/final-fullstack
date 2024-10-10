@@ -1,24 +1,36 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { User, Lock } from 'lucide-react'
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
 
 function Login({ onLogin }) {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const navigate = useNavigate()
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        // Here you would typically validate the credentials with your backend
-        // For this example, we'll just simulate a successful login
-        onLogin()
-        navigate('/booking')
-    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            // Authenticate with Firebase
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            console.log('User signed in:', userCredential.user);
+
+            // Handle successful login
+            onLogin();
+            navigate('/booking');
+        } catch (error) {
+            console.error('Error logging in:', error);
+            setError('Invalid email or password');
+        }
+    };
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="px-8 py-6 mt-4 text-left bg-white shadow-lg rounded-lg">
                 <h3 className="text-2xl font-bold text-center mb-6">Login to Your Account</h3>
+                {error && <p className="text-red-500 text-center mb-4">{error}</p>} {/* Display error message */}
                 <form onSubmit={handleSubmit}>
                     <div className="mt-4">
                         <div className="flex items-center border-b border-gray-300 py-2">
@@ -53,7 +65,7 @@ function Login({ onLogin }) {
                 </form>
             </div>
         </div>
-    )
+    );
 }
 
-export default Login
+export default Login;

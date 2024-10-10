@@ -12,7 +12,7 @@ function Navbar({ isAuthenticated, onLogout }) {
                 <div className="space-x-4">
                     {isAuthenticated ? (
                         <>
-                            <Link to="/booking" className="hover:text-blue-200">Booking</Link>
+                            <Link to="/booQueen" className="hover:text-blue-200">BooQueen</Link>
                             <button onClick={onLogout} className="hover:text-blue-200">Logout</button>
                         </>
                     ) : (
