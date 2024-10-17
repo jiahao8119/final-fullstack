@@ -5,6 +5,9 @@ import Login from './components/Login'
 import Register from './components/Register'
 import BookingPage from './components/BookingPage'
 import Footer from './components/Footer'
+import ShopPage from './components/ShopPage'
+import Profile from './components/Profile'
+//import CheckoutPage from './components/CheckoutPage'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -24,27 +27,28 @@ function App() {
       <main className="flex-grow">
         <Routes>
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
-          <Route path="/register" element={<Register />} />
+          <Route
+            path="/register"
+            element={<Register onLogin={handleLogin} />} // Pass the handleLogin prop here
+          />
           <Route
             path="/booking"
             element={
               isAuthenticated ? (
-                <BookingPage bookings={bookings} setBookings={setBookings} /> // Pass bookings as props
+                <BookingPage bookings={bookings} setBookings={setBookings} />
               ) : (
                 <Navigate to="/login" replace />
               )
             }
           />
-
-
-
-
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<Navigate to="/booking" replace />} />
         </Routes>
       </main>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

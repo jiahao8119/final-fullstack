@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Calendar, Clock, Phone, Mail, Trash, Edit } from 'lucide-react'
+import { Trash, Edit } from 'lucide-react'
 import axios from 'axios';
 
 const courts = [
@@ -50,7 +50,7 @@ function BookingPage() {
 
             console.log('Booking created:', response.data);
             alert('Booking successful!');
-            setBookings([...bookings, response.data]); // Update state with new booking
+            setBookings([...bookings, response.data]);
             clearForm();
         } catch (error) {
             console.error('Error creating booking:', error);
@@ -123,7 +123,7 @@ function BookingPage() {
                     <img
                         src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
                         alt="Badminton Court"
-                        className="w-full h-64 object-cover rounded-lg shadow-md"
+                        className="w-full h-full object-cover rounded-lg shadow-md"
                     />
                 </div>
                 <div>
@@ -150,7 +150,6 @@ function BookingPage() {
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Select Date</label>
                             <div className="relative">
-                                <Calendar className="absolute top-3 left-3 text-gray-400" />
                                 <input
                                     type="date"
                                     className="pl-10 input"
@@ -181,7 +180,6 @@ function BookingPage() {
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Select Time</label>
                             <div className="relative">
-                                <Clock className="absolute top-3 left-3 text-gray-400" />
                                 <select
                                     className="pl-10 input"
                                     value={selectedTime}
@@ -200,7 +198,7 @@ function BookingPage() {
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
                             <div className="relative">
-                                <Phone className="absolute top-3 left-3 text-gray-400" />
+
                                 <input
                                     type="tel"
                                     className="pl-10 input"
@@ -213,7 +211,7 @@ function BookingPage() {
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                             <div className="relative">
-                                <Mail className="absolute top-3 left-3 text-gray-400" />
+
                                 <input
                                     type="email"
                                     className="pl-10 input"
