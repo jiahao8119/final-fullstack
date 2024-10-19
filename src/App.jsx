@@ -7,7 +7,8 @@ import BookingPage from './components/BookingPage'
 import Footer from './components/Footer'
 import ShopPage from './components/ShopPage'
 import Profile from './components/Profile'
-//import CheckoutPage from './components/CheckoutPage'
+import ShowsBooking from './components/ShowsBooking'
+import Chatbot from './components/Chatbot'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -29,7 +30,7 @@ function App() {
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route
             path="/register"
-            element={<Register onLogin={handleLogin} />} // Pass the handleLogin prop here
+            element={<Register onLogin={handleLogin} />}
           />
           <Route
             path="/booking"
@@ -43,9 +44,11 @@ function App() {
           />
           <Route path="/shop" element={<ShopPage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/Bookings" element={<ShowsBooking />} />
           <Route path="/" element={<Navigate to="/booking" replace />} />
         </Routes>
       </main>
+      <Chatbot />
       <Footer />
     </div>
   );

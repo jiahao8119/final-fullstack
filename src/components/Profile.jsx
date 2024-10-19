@@ -13,7 +13,7 @@ const Profile = () => {
     const db = getFirestore();
     const storage = getStorage();
 
-    // Fetch the profile image URL from Firestore when the component loads
+
     useEffect(() => {
         const fetchProfileImage = async () => {
             if (user) {
@@ -27,21 +27,21 @@ const Profile = () => {
                 }
             }
         };
-        fetchProfileImage(); // Fetch the profile image on component mount
+        fetchProfileImage();
     }, [user, db]);
 
-    // Function to handle image upload
+
     const handleImageUpload = async (e) => {
         const file = e.target.files[0]; // Get the selected file
-        setProfileImage(file); // Set the file in state for preview
+        setProfileImage(file);
 
         if (file) {
-            const storageRef = ref(storage, `profilePictures/${user.uid}/${file.name}`); // Create a reference to store the file in Firebase Storage
-            await uploadBytes(storageRef, file); // Upload the file
-            const url = await getDownloadURL(storageRef); // Get the download URL
-            setImageUrl(url); // Update the state with the image URL
+            const storageRef = ref(storage, `profilePictures/${user.uid}/${file.name}`);
+            await uploadBytes(storageRef, file);
+            const url = await getDownloadURL(storageRef);
+            setImageUrl(url);
 
-            // Save the image URL to Firestore linked to the user account
+
             const userDocRef = doc(db, 'users', user.uid);
             await updateDoc(userDocRef, { profileImageUrl: url });
         }
@@ -51,7 +51,7 @@ const Profile = () => {
         <div className="bg-white p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
             <h1 className="text-3xl font-bold mb-6 text-center">User Profile</h1>
             <div className="flex flex-col items-center mb-6">
-                {/* Preview the profile image before upload or display the saved image */}
+
                 {profileImage ? (
                     <img src={URL.createObjectURL(profileImage)} alt="Profile Preview" className="w-32 h-32 rounded-full mb-4" />
                 ) : imageUrl ? (

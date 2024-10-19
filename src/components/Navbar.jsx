@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
-import { Feather } from 'lucide-react'
-
+import { Link } from 'react-router-dom';
+import { Feather } from 'lucide-react';
+import DropdownMenu from './DropdownMenu';
 
 function Navbar({ isAuthenticated, onLogout }) {
     return (
@@ -9,14 +9,12 @@ function Navbar({ isAuthenticated, onLogout }) {
                 <Link to="/" className="flex items-center space-x-2">
                     <Feather className="w-8 h-8" />
                     <span className="text-xl font-bold">BadmintonBooker</span>
-
                 </Link>
                 <div className="space-x-4">
                     {isAuthenticated ? (
                         <>
-                            <Link to="/shop" className="hover:text-blue-200">Shop</Link>
-                            <Link to="/profile" className="hover:text-blue-200">Profile</Link>
-                            <button onClick={onLogout} className="hover:text-blue-200">Logout</button>
+
+                            <DropdownMenu onLogout={onLogout} />
                         </>
                     ) : (
                         <>
@@ -27,7 +25,8 @@ function Navbar({ isAuthenticated, onLogout }) {
                 </div>
             </div>
         </nav>
-    )
+    );
 }
 
-export default Navbar
+export default Navbar;
+
