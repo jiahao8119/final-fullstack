@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
-import { Trash, Edit } from 'lucide-react'
+import { useState } from 'react'
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const courts = [
     { id: 1, name: 'Court A' },
@@ -22,18 +23,6 @@ function BookingPage() {
     const [description, setDescription] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
     const [email, setEmail] = useState('')
-    const [bookings, setBookings] = useState([])
-    const [editingBookingId, setEditingBookingId] = useState(null)
-
-    useEffect(() => {
-        axios.get(API_URL)
-            .then(response => {
-                console.log('Fetched bookings:', response.data);
-                setBookings(response.data);
-            })
-            .catch(error => console.error('Error fetching bookings:', error));
-    }, []);
-
 
     const handleBooking = async (e) => {
         e.preventDefault();
@@ -49,14 +38,14 @@ function BookingPage() {
             });
 
             console.log('Booking created:', response.data);
-            alert('Booking successful!');
-            setBookings([...bookings, response.data]);
+            toast.success('Booking successful!');
             clearForm();
         } catch (error) {
             console.error('Error creating booking:', error);
-            alert('Error creating booking');
+            toast.error('Error creating booking');
         }
     };
+
     const clearForm = () => {
         setTitle('')
         setDescription('')
@@ -65,58 +54,13 @@ function BookingPage() {
         setSelectedTime('')
         setPhoneNumber('')
         setEmail('')
-
-        setEditingBookingId(null)
-    };
-
-    const handleDelete = (id) => {
-        axios.delete(`${API_URL}/${id}`)
-            .then(() => {
-                setBookings(bookings.filter((booking) => booking.id !== id));
-            })
-            .catch(error => console.error('Error deleting booking:', error));
-    };
-
-    const handleEdit = (booking) => {
-        setEditingBookingId(booking.id)
-        setTitle(booking.title)
-        setDescription(booking.description)
-        setSelectedDate(booking.date)
-        setSelectedCourt(booking.court)
-        setSelectedTime(booking.time)
-        setPhoneNumber(booking.phone_number)
-        setEmail(booking.email)
-
-    };
-
-    const handleUpdate = (e) => {
-        e.preventDefault();
-        const updatedBooking = {
-            title,
-            description,
-            date: selectedDate,
-            time: selectedTime,
-            phone_number: phoneNumber,
-            email,
-            court: selectedCourt,
-        };
-
-        axios.put(`${API_URL}/${editingBookingId}`, updatedBooking)
-            .then(response => {
-                const updatedBookings = bookings.map(booking =>
-                    booking.id === editingBookingId ? response.data : booking
-                );
-                setBookings(updatedBookings);
-                clearForm();
-                alert('Booking updated!');
-            })
-            .catch(error => console.error('Error updating booking:', error));
     };
 
     return (
         <div className="container mx-auto px-4 py-8">
+            <ToastContainer />
             <h1 className="text-3xl font-bold mb-8 text-center">
-                {editingBookingId ? 'Update Booking' : 'Book a Badminton Court Now'}
+                Book a Badminton Court Now
             </h1>
             <div className="grid md:grid-cols-2 gap-8">
                 <div>
@@ -127,7 +71,7 @@ function BookingPage() {
                     />
                 </div>
                 <div>
-                    <form onSubmit={editingBookingId ? handleUpdate : handleBooking} className="space-y-4">
+                    <form onSubmit={handleBooking} className="space-y-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
                             <input
@@ -223,44 +167,12 @@ function BookingPage() {
                         </div>
 
                         <button type="submit" className="w-full btn btn-primary">
-                            {editingBookingId ? 'Update Booking' : 'Book Now'}
+                            Book Now
                         </button>
                     </form>
                 </div>
-            </div >
-
-
-            < div className="mt-8" >
-                <h2 className="text-2xl font-bold mb-4">Bookings</h2>
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    {bookings.map((booking) => (
-                        <div key={booking.id} className="border rounded-lg p-4 shadow-md">
-                            <h3 className="text-lg font-bold">{booking.title}</h3>
-                            <p>{booking.description}</p>
-                            <p>Date: {booking.date}</p>
-                            <p>Time: {booking.time}</p>
-                            <p>Court: {booking.court}</p>
-                            <p>Phone: {booking.phone_number}</p>
-                            <p>Email: {booking.email}</p>
-                            <div className="flex justify-between mt-4">
-                                <button
-                                    onClick={() => handleEdit(booking)}
-                                    className="btn btn-secondary"
-                                >
-                                    <Edit className="inline mr-2" /> Edit
-                                </button>
-                                <button
-                                    onClick={() => handleDelete(booking.id)}
-                                    className="btn btn-danger"
-                                >
-                                    <Trash className="inline mr-2" /> Delete
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div >
-        </div >
+            </div>
+        </div>
     )
 }
 

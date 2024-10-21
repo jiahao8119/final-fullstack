@@ -39,12 +39,12 @@ const DropdownMenu = ({ onLogout }) => {
                             Profile
                         </Link>
                         <Link
-                            to="/ShowsBooking"
+                            to="/showbookings"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-black-800"
                             role="menuitem"
                             onClick={() => setIsOpen(false)}
                         >
-                            Mybookings
+                            My Bookings
                         </Link>
                         <button
                             onClick={() => {

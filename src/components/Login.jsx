@@ -3,12 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import { User, Lock } from 'lucide-react'
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 function Login({ onLogin }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const notify = () => toast("User LoggedIn!");
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,6 +22,8 @@ function Login({ onLogin }) {
             // Authenticate with Firebase
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             console.log('User signed in:', userCredential.user);
+
+            notify();
 
             // Handle successful login
             onLogin();
@@ -63,6 +71,9 @@ function Login({ onLogin }) {
                         <a href="#" className="text-sm text-blue-600 hover:underline">Forgot password?</a>
                     </div>
                 </form>
+            </div>
+            <div>
+                <ToastContainer />
             </div>
         </div>
     );

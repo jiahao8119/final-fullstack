@@ -7,7 +7,8 @@ const Chatbot = () => {
         { sender: "bot", text: "Hello! How can I assist you with your shopping today?" }
     ]);
     const [userInput, setUserInput] = useState('');
-    const [loading, setLoading] = useState(false);  // Added loading state
+    const [loading, setLoading] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);  // New state to control chatbot visibility
 
     const handleSendMessage = async () => {
         if (!userInput.trim()) return;
@@ -44,31 +45,44 @@ const Chatbot = () => {
         }
     };
 
+    const toggleChatbot = () => {
+        setIsOpen(!isOpen);
+    };
+
     return (
-        <div className="chatbot-container">
-            <div className="chat-window">
-                {messages.map((msg, idx) => (
-                    <div key={idx} className={`message ${msg.sender}`}>
-                        {msg.text}
+        <div className={`chatbot-wrapper ${isOpen ? 'open' : ''}`}>
+            {isOpen ? (
+                <div className="chatbot-container">
+                    <div className="chat-header">
+                        <h3>Shopping Assistant</h3>
+                        <button onClick={toggleChatbot} className="minimize-btn">-</button>
                     </div>
-                ))}
-                {loading && <div className="message bot">Bot is typing...</div>}  {/* Loading indicator */}
-            </div>
-            <div className="input-container">
-                <input
-                    type="text"
-                    value={userInput}
-                    onChange={(e) => setUserInput(e.target.value)}
-                    placeholder="Type a message..."
-                    disabled={loading}  // Disable input when loading
-                />
-                <button onClick={handleSendMessage} disabled={loading}>Send</button>  {/* Disable button when loading */}
-            </div>
+                    <div className="chat-window">
+                        {messages.map((msg, idx) => (
+                            <div key={idx} className={`message ${msg.sender}`}>
+                                {msg.text}
+                            </div>
+                        ))}
+                        {loading && <div className="message bot">Bot is typing...</div>}
+                    </div>
+                    <div className="input-container">
+                        <input
+                            type="text"
+                            value={userInput}
+                            onChange={(e) => setUserInput(e.target.value)}
+                            placeholder="Type a message..."
+                            disabled={loading}
+                        />
+                        <button onClick={handleSendMessage} disabled={loading}>Send</button>
+                    </div>
+                </div>
+            ) : (
+                <button onClick={toggleChatbot} className="chatbot-icon">
+                    💬
+                </button>
+            )}
         </div>
     );
 };
 
 export default Chatbot;
-
-
-

@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import { User, Mail, MapPin, Phone } from 'lucide-react';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+import { getAuth, signOut } from 'firebase/auth';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
     const [profileImage, setProfileImage] = useState(null); // Store selected file for preview
@@ -12,6 +14,7 @@ const Profile = () => {
     const user = auth.currentUser; // Get the current authenticated user
     const db = getFirestore();
     const storage = getStorage();
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -40,10 +43,23 @@ const Profile = () => {
             await uploadBytes(storageRef, file);
             const url = await getDownloadURL(storageRef);
             setImageUrl(url);
+            toast.success('Profile picture updated!')
 
 
             const userDocRef = doc(db, 'users', user.uid);
             await updateDoc(userDocRef, { profileImageUrl: url });
+            toast.error('Error updating profile picture')
+        }
+    };
+
+    const handleLogout = async () => {
+        try {
+            await signOut(auth);
+            toast.success('Logged out successfully');
+            navigate('/login');
+        } catch (error) {
+            console.error('Logout error:', error);
+            toast.error('Failed to log out');
         }
     };
 
@@ -90,9 +106,15 @@ const Profile = () => {
                     <span>012-3456789</span>
                 </div>
             </div>
+
+            <button
+                onClick={handleLogout}
+                className="mt-6 w-full bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-300"
+            >
+                Logout
+            </button>
         </div>
     );
 };
 
 export default Profile;
-

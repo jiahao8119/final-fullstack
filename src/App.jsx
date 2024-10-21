@@ -9,10 +9,11 @@ import ShopPage from './components/ShopPage'
 import Profile from './components/Profile'
 import ShowsBooking from './components/ShowsBooking'
 import Chatbot from './components/Chatbot'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [bookings, setBookings] = useState([])
 
   const handleLogin = () => {
     setIsAuthenticated(true)
@@ -23,10 +24,13 @@ function App() {
   }
 
   return (
+
     <div className="flex flex-col min-h-screen">
       <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
       <main className="flex-grow">
+        <ToastContainer />
         <Routes>
+          <Route path="/" element={<Navigate to="/booking" replace />} />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route
             path="/register"
@@ -36,7 +40,7 @@ function App() {
             path="/booking"
             element={
               isAuthenticated ? (
-                <BookingPage bookings={bookings} setBookings={setBookings} />
+                <BookingPage />
               ) : (
                 <Navigate to="/login" replace />
               )
@@ -44,14 +48,14 @@ function App() {
           />
           <Route path="/shop" element={<ShopPage />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/Bookings" element={<ShowsBooking />} />
-          <Route path="/" element={<Navigate to="/booking" replace />} />
+          <Route path="/showbookings" element={<ShowsBooking />} />
         </Routes>
       </main>
       <Chatbot />
       <Footer />
     </div>
+
   );
-};
+}
 
 export default App;
