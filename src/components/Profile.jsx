@@ -78,7 +78,7 @@ const Profile = () => {
                     </div>
                 )}
 
-                <h2 className="text-2xl font-semibold">Jiahao</h2>
+
             </div>
 
             {/* Image upload input */}
@@ -95,7 +95,7 @@ const Profile = () => {
             <div className="space-y-4">
                 <div className="flex items-center">
                     <Mail className="mr-4 text-blue-600" />
-                    <span>jiahao@gmail.com</span>
+                    <span>user@gmail.com</span>
                 </div>
                 <div className="flex items-center">
                     <MapPin className="mr-4 text-blue-600" />

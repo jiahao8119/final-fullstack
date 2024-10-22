@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { Trash, Edit } from 'lucide-react'
+import { useState, useEffect } from 'react';
+import { Trash, Edit } from 'lucide-react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,7 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 const API_URL = 'https://51aff819-ce28-471e-99e4-9701444848fa-00-2lgwh8tk10z56.pike.replit.dev:3000/bookings';
 
 function ShowsBookings() {
-    const [bookings, setBookings] = useState([])
+    const [bookings, setBookings] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedBooking, setSelectedBooking] = useState(null);
 
     useEffect(() => {
         axios.get(API_URL)
@@ -30,6 +32,26 @@ function ShowsBookings() {
             });
     };
 
+    const handleEdit = (booking) => {
+        setSelectedBooking(booking);
+        setIsModalOpen(true);
+    };
+
+    const handleSaveChanges = () => {
+        axios.put(`${API_URL}/${selectedBooking.id}`, selectedBooking)
+            .then(() => {
+                setBookings(bookings.map(booking =>
+                    booking.id === selectedBooking.id ? selectedBooking : booking
+                ));
+                toast.success('Booking updated');
+                setIsModalOpen(false);
+            })
+            .catch(error => {
+                console.error('Error updating booking:', error);
+                toast.error('Error updating booking');
+            });
+    };
+
     return (
         <div className="container mx-auto px-4 py-8">
             <ToastContainer />
@@ -46,7 +68,7 @@ function ShowsBookings() {
                         <p>Email: {booking.email}</p>
                         <div className="flex justify-between mt-4">
                             <button
-                                onClick={() => {/* Handle edit */ }}
+                                onClick={() => handleEdit(booking)}
                                 className="btn btn-secondary"
                             >
                                 <Edit className="inline mr-2" /> Edit
@@ -61,8 +83,71 @@ function ShowsBookings() {
                     </div>
                 ))}
             </div>
+
+            {/* Modal for editing */}
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+                    <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
+                        <h2 className="text-2xl mb-4">Edit Booking</h2>
+                        <form>
+                            <div className="mb-4">
+                                <label className="block mb-2">Title</label>
+                                <input
+                                    type="text"
+                                    value={selectedBooking.title}
+                                    onChange={(e) => setSelectedBooking({ ...selectedBooking, title: e.target.value })}
+                                    className="w-full p-2 border rounded"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block mb-2">Description</label>
+                                <textarea
+                                    value={selectedBooking.description}
+                                    onChange={(e) => setSelectedBooking({ ...selectedBooking, description: e.target.value })}
+                                    className="w-full p-2 border rounded"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block mb-2">Date</label>
+                                <input
+                                    type="date"
+                                    value={selectedBooking.date}
+                                    onChange={(e) => setSelectedBooking({ ...selectedBooking, date: e.target.value })}
+                                    className="w-full p-2 border rounded"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block mb-2">Time</label>
+                                <input
+                                    type="time"
+                                    value={selectedBooking.time}
+                                    onChange={(e) => setSelectedBooking({ ...selectedBooking, time: e.target.value })}
+                                    className="w-full p-2 border rounded"
+                                />
+                            </div>
+                            <div className="flex justify-end">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsModalOpen(false)}
+                                    className="btn btn-secondary mr-2"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={handleSaveChanges}
+                                    className="btn btn-primary"
+                                >
+                                    Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
-    )
+    );
 }
 
-export default ShowsBookings
+export default ShowsBookings;
+

@@ -19,13 +19,13 @@ function Login({ onLogin }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Authenticate with Firebase
+
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             console.log('User signed in:', userCredential.user);
 
             notify();
 
-            // Handle successful login
+
             onLogin();
             navigate('/booking');
         } catch (error) {

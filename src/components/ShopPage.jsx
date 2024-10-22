@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ProductList from './ProductList'; // Import the ProductList component
+import ProductList from './ProductList';
 
 const ShopPage = () => {
     const [cart, setCart] = useState([]);
@@ -16,7 +16,7 @@ const ShopPage = () => {
 
     return (
         <div className="shop-page">
-            <h1 className="text-3xl font-bold mb-8">Shop Page</h1>
+            <h1 className="text-3xl font-bold mb-8 ">Shop</h1>
             <ProductList addToCart={addToCart} /> {/* Render the ProductList */}
             <div className="cart-summary mt-8">
                 <h2 className="text-2xl font-semibold mb-4">Cart Summary</h2>
@@ -45,5 +45,8 @@ const ShopPage = () => {
 };
 
 export default ShopPage;
+
+
+
 
 
