@@ -10,6 +10,7 @@ import Profile from './components/Profile';
 import LocateUs from './components/LocateUs';
 import ShowsBooking from './components/ShowsBooking';
 import Chatbot from './components/Chatbot';
+import CheckoutPage from './components/CheckoutPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -74,6 +75,16 @@ function App() {
             element={
               isAuthenticated ? (
                 <LocateUs />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
+          <Route
+            path="/CheckoutPage"
+            element={
+              isAuthenticated ? (
+                <CheckoutPage />
               ) : (
                 <Navigate to="/login" replace />
               )

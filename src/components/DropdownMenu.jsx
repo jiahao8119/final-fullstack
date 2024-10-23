@@ -47,15 +47,7 @@ const DropdownMenu = ({ onLogout }) => {
                             My Bookings
                         </Link>
                         <Link
-                            to="/Cart"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-black-800"
-                            role="menuitem"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            Cart
-                        </Link>
-                        <Link
-                            to="/Checkout"
+                            to="/CheckoutPage"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-black-800"
                             role="menuitem"
                             onClick={() => setIsOpen(false)}
