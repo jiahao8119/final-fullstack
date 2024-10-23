@@ -7,11 +7,11 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-    const [profileImage, setProfileImage] = useState(null); // Store selected file for preview
-    const [imageUrl, setImageUrl] = useState(''); // Store uploaded image URL
+    const [profileImage, setProfileImage] = useState(null);
+    const [imageUrl, setImageUrl] = useState('');
 
     const auth = getAuth();
-    const user = auth.currentUser; // Get the current authenticated user
+    const user = auth.currentUser;
     const db = getFirestore();
     const storage = getStorage();
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Profile = () => {
                 if (userDocSnap.exists()) {
                     const userData = userDocSnap.data();
                     if (userData.profileImageUrl) {
-                        setImageUrl(userData.profileImageUrl); // Set the saved image URL
+                        setImageUrl(userData.profileImageUrl);
                     }
                 }
             }
@@ -35,7 +35,7 @@ const Profile = () => {
 
 
     const handleImageUpload = async (e) => {
-        const file = e.target.files[0]; // Get the selected file
+        const file = e.target.files[0];
         setProfileImage(file);
 
         if (file) {
@@ -81,7 +81,7 @@ const Profile = () => {
 
             </div>
 
-            {/* Image upload input */}
+
             <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700">Upload Profile Picture</label>
                 <input

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const API_URL = 'https://51aff819-ce28-471e-99e4-9701444848fa-00-2lgwh8tk10z56.pike.replit.dev:3000/bookings';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function ShowsBookings() {
     const [bookings, setBookings] = useState([]);
@@ -84,7 +84,6 @@ function ShowsBookings() {
                 ))}
             </div>
 
-            {/* Modal for editing */}
             {isModalOpen && (
                 <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
                     <div className="bg-white p-6 rounded shadow-md w-full max-w-md">

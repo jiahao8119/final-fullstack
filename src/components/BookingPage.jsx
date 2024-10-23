@@ -13,7 +13,7 @@ const timeSlots = [
     '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'
 ]
 
-const API_URL = 'https://51aff819-ce28-471e-99e4-9701444848fa-00-2lgwh8tk10z56.pike.replit.dev:3000/bookings';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function BookingPage() {
     const [selectedDate, setSelectedDate] = useState('')

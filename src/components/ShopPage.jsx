@@ -7,17 +7,17 @@ const ShopPage = () => {
     const navigate = useNavigate();
 
     const addToCart = (product) => {
-        setCart([...cart, product]); // Add product to the cart
+        setCart([...cart, product]);
     };
 
     const handleCheckout = () => {
-        navigate('/checkout', { state: { cart } }); // Navigate to CheckoutPage with cart items
+        navigate('/checkout', { state: { cart } });
     };
 
     return (
         <div className="shop-page">
             <h1 className="text-3xl font-bold mb-8 ">Shop</h1>
-            <ProductList addToCart={addToCart} /> {/* Render the ProductList */}
+            <ProductList addToCart={addToCart} />
             <div className="cart-summary mt-8">
                 <h2 className="text-2xl font-semibold mb-4">Cart Summary</h2>
                 {cart.length > 0 ? (

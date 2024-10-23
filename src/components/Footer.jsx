@@ -1,4 +1,5 @@
 import { Facebook, Twitter, Instagram } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 function Footer() {
     return (
@@ -16,6 +17,7 @@ function Footer() {
                             <li><a href="#" className="text-gray-400 hover:text-white">Contact</a></li>
                             <li><a href="#" className="text-gray-400 hover:text-white">Terms of Service</a></li>
                             <li><a href="#" className="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                            <li><Link to="/locate-us" className="text-gray-400 hover:text-white">Locate Us</Link></li>
                         </ul>
                     </div>
                     <div className="w-full md:w-1/3">
@@ -34,7 +36,7 @@ function Footer() {
                     </div>
                 </div>
                 <div className="mt-8 text-center text-gray-400">
-                    <p>&copy; 2024 BadmintonBooker. Meow meow</p>
+                    <p>&copy; 2024 BadmintonBooker. </p>
                 </div>
             </div>
         </footer>

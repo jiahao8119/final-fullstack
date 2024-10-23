@@ -7,6 +7,7 @@ import BookingPage from './components/BookingPage';
 import Footer from './components/Footer';
 import ShopPage from './components/ShopPage';
 import Profile from './components/Profile';
+import LocateUs from './components/LocateUs';
 import ShowsBooking from './components/ShowsBooking';
 import Chatbot from './components/Chatbot';
 import { ToastContainer } from 'react-toastify';
@@ -46,7 +47,6 @@ function App() {
             }
           />
 
-          {/* Apply authentication check to these routes */}
           <Route
             path="/shop"
             element={
@@ -69,6 +69,19 @@ function App() {
               )
             }
           />
+          <Route
+            path="/locate-us"
+            element={
+              isAuthenticated ? (
+                <LocateUs />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
+
+
+
         </Routes>
       </main>
       <Chatbot />

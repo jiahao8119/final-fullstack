@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { User, Lock } from 'lucide-react'
+import { User, Lock, Eye, EyeOff } from 'lucide-react'
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import { ToastContainer, toast } from 'react-toastify';
@@ -12,6 +12,7 @@ function Login({ onLogin }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const notify = () => toast("User LoggedIn!");
 
@@ -57,18 +58,31 @@ function Login({ onLogin }) {
                         <div className="flex items-center border-b border-gray-300 py-2">
                             <Lock className="text-gray-400 mr-2" />
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 placeholder="Password"
                                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
+
+                            <button
+                                type="button"
+                                className="text-gray-500"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? (
+                                    <EyeOff className="h-4 w-4" />
+                                ) : (
+                                    <Eye className="h-4 w-4" />
+                                )}
+                            </button>
                         </div>
                     </div>
+
                     <div className="flex items-baseline justify-between mt-6">
                         <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Login</button>
-                        <a href="#" className="text-sm text-blue-600 hover:underline">Forgot password?</a>
+                        <a href="/register" className="text-sm text-blue-600 hover:underline">Don&apos;t have an account?</a>
                     </div>
                 </form>
             </div>
