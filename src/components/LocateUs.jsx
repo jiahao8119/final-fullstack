@@ -10,7 +10,7 @@ const LocateUs = () => {
     useEffect(() => {
         if (mapRef.current) return;
 
-        mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
+        mapboxgl.accessToken = 'pk.eyJ1IjoiaGRlczkxMzkiLCJhIjoiY20ya3YwMnE5MDVoNzJpcXlvNmZ3dWVsbiJ9.nX6MSzWxLNfQEawMzOPKYw'
 
 
         mapRef.current = new mapboxgl.Map({
