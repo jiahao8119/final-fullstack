@@ -32,7 +32,7 @@ const LocateUs = () => {
         <div className="locate-us-container">
             <div
                 ref={mapContainerRef}
-                className="map-container w-full h-96 rounded-lg shadow-md"
+                className="map-container w-full h-lvh rounded-lg shadow-md"
             ></div>
         </div>
     );

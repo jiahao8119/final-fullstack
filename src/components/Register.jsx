@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { User, Mail, Lock } from "lucide-react";
+import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { auth, db } from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
@@ -9,6 +9,7 @@ const Register = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
@@ -81,13 +82,24 @@ const Register = () => {
                         <div className="flex items-center border-b border-gray-300 py-2">
                             <Lock className="text-gray-400 mr-2" />
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 placeholder="Password"
                                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
+                            <button
+                                type="button"
+                                className="text-gray-500"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? (
+                                    <EyeOff className="h-4 w-4" />
+                                ) : (
+                                    <Eye className="h-4 w-4" />
+                                )}
+                            </button>
                         </div>
                     </div>
                     <div className="flex justify-center mt-6">

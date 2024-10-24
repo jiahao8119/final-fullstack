@@ -7,7 +7,7 @@ const CheckoutPage = () => {
     const { cart } = location.state || { cart: [] };
 
     const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    const shipping = 12.99;
+    const shipping = 5.00;
     const tax = subtotal * 0.1;
     const total = subtotal + shipping + tax;
 
@@ -71,10 +71,6 @@ const CheckoutPage = () => {
                             <Lock className="w-5 h-5" />
                             Complete Purchase
                         </button>
-
-                        <p className="text-sm text-gray-500 text-center">
-                            Your payment information is encrypted and secure. We never store your credit card details.
-                        </p>
                     </div>
                 </div>
             </div>
@@ -83,3 +79,6 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
+
+
+
