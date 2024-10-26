@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
+
 function Login({ onLogin }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,7 +16,6 @@ function Login({ onLogin }) {
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const notify = () => toast("User LoggedIn!");
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -79,7 +79,6 @@ function Login({ onLogin }) {
                             </button>
                         </div>
                     </div>
-
                     <div className="flex items-baseline justify-between mt-6">
                         <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Login</button>
                         <a href="/register" className="text-sm text-blue-600 hover:underline">Don&apos;t have an account?</a>

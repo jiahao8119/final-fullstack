@@ -5,6 +5,14 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const API_URL = import.meta.env.VITE_API_URL;
+const courts = [
+    { id: 1, name: 'Court A' },
+    { id: 2, name: 'Court B' },
+    { id: 3, name: 'Court C' },
+]
+const timeSlots = [
+    '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'
+]
 
 function ShowsBookings() {
     const [bookings, setBookings] = useState([]);
@@ -117,13 +125,74 @@ function ShowsBookings() {
                             </div>
                             <div className="mb-4">
                                 <label className="block mb-2">Time</label>
-                                <input
+                                <select
                                     type="time"
                                     value={selectedBooking.time}
                                     onChange={(e) => setSelectedBooking({ ...selectedBooking, time: e.target.value })}
                                     className="w-full p-2 border rounded"
+                                >
+                                    {timeSlots.map((slot) => (
+                                        <option key={slot} value={slot}>
+                                            {slot}
+                                        </option>
+                                    ))}
+                                </select>
+
+                            </div>
+                            <div className="mb-4">
+                                <label className="block mb-2">Phone Number</label>
+                                <input
+                                    type="Phone"
+                                    value={selectedBooking.phone_number}
+                                    onChange={(e) => setSelectedBooking({ ...selectedBooking, phone_number: e.target.value })}
+                                    className="w-full p-2 border rounded"
                                 />
                             </div>
+                            <div className="mb-4">
+                                <label className="block mb-2">Email</label>
+                                <input
+                                    type="Phone"
+                                    value={selectedBooking.rmail}
+                                    onChange={(e) => setSelectedBooking({ ...selectedBooking, email: e.target.value })}
+                                    className="w-full p-2 border rounded"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block mb-2">Court</label>
+                                <select
+                                    type="Phone"
+                                    value={selectedBooking.court}
+                                    onChange={(e) => setSelectedBooking({ ...selectedBooking, court: e.target.value })}
+                                    className="w-full p-2 border rounded"
+                                >
+                                    {courts.map((court) => (
+                                        <option key={court.id} value={court.name}>
+                                            {court.name}
+                                        </option>
+                                    ))}
+                                </select>
+
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             <div className="flex justify-end">
                                 <button
                                     type="button"
