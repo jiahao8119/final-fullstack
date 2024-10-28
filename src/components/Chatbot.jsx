@@ -54,7 +54,7 @@ const Chatbot = () => {
             {isOpen ? (
                 <div className="chatbot-container">
                     <div className="chat-header">
-                        <h3>Shopping Assistant</h3>
+                        <h3>Badminton Assistant</h3>
                         <button onClick={toggleChatbot} className="minimize-btn">-</button>
                     </div>
                     <div className="chat-window">

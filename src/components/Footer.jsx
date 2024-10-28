@@ -1,4 +1,4 @@
-import { Facebook, Twitter, Instagram } from 'lucide-react'
+import { Facebook, Twitter, Instagram, Github } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 function Footer() {
@@ -15,8 +15,6 @@ function Footer() {
                         <ul className="space-y-2">
                             <li><a href="#" className="text-gray-400 hover:text-white">About Us</a></li>
                             <li><a href="#" className="text-gray-400 hover:text-white">Contact</a></li>
-                            <li><a href="#" className="text-gray-400 hover:text-white">Terms of Service</a></li>
-                            <li><a href="#" className="text-gray-400 hover:text-white">Privacy Policy</a></li>
                             <li><Link to="/locate-us" className="text-gray-400 hover:text-white">Locate Us</Link></li>
                         </ul>
                     </div>
@@ -32,15 +30,23 @@ function Footer() {
                             <a href="#" className="text-gray-400 hover:text-white">
                                 <Instagram />
                             </a>
+                            <a href="https://github.com/jiahao8119" target="_blank" className="text-gray-400 hover:text-white">
+                                <Github />
+                            </a>
                         </div>
+
+
                     </div>
+
                 </div>
                 <div className="mt-8 text-center text-gray-400">
                     <p>&copy; 2024 BadmintonBooker. </p>
                 </div>
             </div>
-        </footer>
+        </footer >
     )
 }
+
+
 
 export default Footer

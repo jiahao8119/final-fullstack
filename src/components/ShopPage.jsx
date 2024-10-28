@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
+
 const ShopPage = () => {
     const [cart, setCart] = useState([]);
     const navigate = useNavigate();
@@ -41,7 +42,7 @@ const ShopPage = () => {
             <ProductList addToCart={addToCart} />
 
 
-            <div className="cart-summary mt-8 max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg">
+            <div className="cart-summary mt-8 max-w-md mx-auto p-8 bg-white shadow-lg rounded-lg">
                 <h2 className="text-2xl font-semibold mb-4 text-gray-800 border-b pb-2">Cart Summary</h2>
                 {cart.length > 0 ? (
                     <ul className="space-y-4 mb-4">
@@ -63,7 +64,9 @@ const ShopPage = () => {
                         className="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors mt-4 font-semibold"
                         onClick={handleCheckout}
                     >
+
                         Proceed to Checkout
+
                     </button>
                 )}
             </div>

@@ -69,7 +69,7 @@ const CheckoutPage = () => {
                             onClick={handlePurchase}
                         >
                             <Lock className="w-5 h-5" />
-                            Complete Purchase
+                            Confirm Purchase
                         </button>
                     </div>
                 </div>

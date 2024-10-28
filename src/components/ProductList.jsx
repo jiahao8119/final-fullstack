@@ -3,7 +3,7 @@ import { View, X, ShoppingCart } from "lucide-react";
 
 const products = [
 
-    { id: 1, name: 'YONEX NANOFLARE 700 PRO MIDNIGHT PURPLE', price: 769.90, description: '2NF-700P', info: 'Color: Midnight Purple, Made In Japan', image: "https://i.ibb.co/zZfLgVQ/racket2.png" },
+    { id: 1, name: 'YONEX NANOFLARE 700 PRO MIDNIGHT PURPLE', price: 769.90, description: '2NF-700P', image: "https://i.ibb.co/zZfLgVQ/racket2.png" },
     { id: 2, name: 'YONEX NANOFLARE 700 TOUR MIDNIGHT PURPLE', price: 599.90, description: '2NF-700T', image: "https://i.ibb.co/WznDdjX/racket1.png" },
     { id: 3, name: 'YONEX NANOFLARE 1000Z LIGHTNING YELLOW', price: 879.90, description: 'NF-1000Z', image: "https://i.ibb.co/nfBkKvJ/racket3.png" },
     { id: 4, name: 'POWER CUSHION STRIDER RAY UNISEX WHITE', price: 264.90, description: 'Power Cushion, Ergoshape, Round Sole, Radial Blade Sole, Semi One-Piece Sole', image: "https://i.ibb.co/FX0w7W9/badmintonshoe1.png" },
@@ -70,7 +70,7 @@ const ProductList = ({ addToCart }) => {
                         </div>
                         Description
 
-                        <p>{selectedProduct.info}</p>
+                        <p>{selectedProduct.description}</p>
                         <p className="mt-2 font-bold">RM{selectedProduct.price}</p>
                         <button
                             onClick={() => handleAddToCart(selectedProduct)}
