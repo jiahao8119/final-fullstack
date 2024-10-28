@@ -1,9 +1,10 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Lock, Package } from 'lucide-react';
 import { toast, ToastContainer } from 'react-toastify';
 
 const CheckoutPage = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const { cart } = location.state || { cart: [] };
 
     const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -13,6 +14,10 @@ const CheckoutPage = () => {
 
     const handlePurchase = () => {
         toast.success('Purchase completed successfully!');
+
+        setTimeout(() => {
+            navigate('/Shop', { state: { cart: [] } });
+        }, 2000);
 
     };
 
